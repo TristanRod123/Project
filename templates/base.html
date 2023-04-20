@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Form</title>
+  <style>
+    /* Center the form in the middle of the page */
+    body {
+      background-color: rgb(31, 31, 31);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    /* Style for the login form */
+    .login-form {
+      width: 315px;
+      padding: 20px;
+      background-color: #808080;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Style for the form inputs */
+    .login-form input {
+      width: 93%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 3px;
+    }
+
+    /* Style for the form submit button */
+    .login-form button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: #ffffff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .login-form button:hover {
+      background-color: #0069d9;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-form">
+    <h1 style = "font-family: Arial,sans-serif;">Login</h1>
+    <form method = 'post' action="">
+      <label for = username></label>
+      <input type="text" name = 'username' placeholder="Username" value ='{{request.form.username}}' required>
+      <input type="password" name='password' placeholder="Password" value ='{{request.form.password}}' required>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+</body>
+</html>

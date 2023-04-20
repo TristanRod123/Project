@@ -1,0 +1,21 @@
+login page (bootstrap)
+redirects to a different page with buttons in the middle with text (that redirect to a different page)
+display information of employee by ID to get all lines of data
+    this would work with the different start and end dates
+one button for inputting employee data
+    can input employee information like the login page
+    then adds information to txt file (payout will start as N/A)
+second button to calculate payroll
+    needs ID and start and end dates 
+    checks if ID is  
+    will tell you if payroll is already calculated
+        if so, then no changes are made
+    then adds it to txt file
+third button
+    display information of employee by ID to get all lines of data
+    needs an input of ID
+    will display formatted information
+        most likely name as header then pay with dates
+Need two extra buttons
+    one always shown to logout and redirects to login page
+    second one needs to be shown after pressing the 3 major button to go back to said buttons 
