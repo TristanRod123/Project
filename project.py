@@ -65,7 +65,7 @@ def input():
         payout = 'N/A'
 
         new_employee = Employee(id, first_name, last_name, hours, wage, end_date, payout)
-        employeeFile = "Project\stuff\employeeInfo.txt"
+        employeeFile = "employeeInfo.txt"
         if (new_employee.employee_exists(employeeFile)):
             return "Employee already exists"
         else:
