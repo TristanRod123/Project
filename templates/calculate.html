@@ -1,23 +1,138 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Calculate Payroll</title>
-    <style>
-        body{
-            background-color: gray;
-        }
+<title>Calculate Payroll</title>
+  <style>
+    #main-header {
+     background-color: #333;
+     color: #fff;
+     display: flex;
+     align-items:center;
+     padding:10px;
+     position: fixed;
+     top: 0;
+     left: 0;
+     right: 0;
+     z-index: 9999;
+     font-family: Arial, sans-seriff;
+    }
 
-        button{
-            margin-left: 165px;
-        }
-    </style>
+    h1 {
+     margin:0;
+     font-size:24px;
+     font-family: Arial, sans-serif;
+    }
+
+    li a .subtext {
+     display: block;
+     margin-top: 5px;
+     font-size: 17px;
+    }
+
+    .nav-logout {
+     position: absolute;
+     top: 50%;
+     transform: translateY(-50%);
+     right: 10px;  
+    }
+
+    .nav-logout:hover {
+     color:aquamarine
+    }
+
+    nav {
+     margin-left: 20px;
+     display:flex;
+     justify-content: flex-end;
+     font-family: Arial, sans-seriff;
+    }
+
+    nav ul {
+     list-style: none;
+     margin: 0;
+     padding:0;
+     display: flex;
+     flex-grow: 1;
+     justify-content: center;
+     align-items: center;
+    }
+
+    nav li {
+     margin:0 10px;
+     flex: 1;
+     text-align: center;
+    }
+
+    nav a {
+     color: #fff;
+     text-decoration: none;
+     font-size: 18px;
+    }
+
+    nav ul li:hover a{
+     color: aquamarine;
+    }
+    /* Center the form in the middle of the page */
+    body {
+      background-color: rgb(31, 31, 31);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    /* Style for the login form */
+    .calculate-form {
+      width: 315px;
+      padding: 20px;
+      background-color: #808080;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Style for the form inputs */
+    .calculate-form input {
+      width: 93%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 3px;
+    }
+
+    /* Style for the form submit button */
+    .calculate-form button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: #ffffff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .calculate-form button:hover {
+      background-color: #0069d9;
+    }
+  </style>
 </head>
 <body>
-    <form method = 'post'>
-        Enter Id: <input name ='ID' required>
-        <br>
-        <button type= 'submit' class > Calculate</button>
+  <header id="main-header">
+    <h1>Payroll</h1>
+    <nav>
+        <ul>
+            <li><a href="home">Home</a></li>
+            <li><a href="input">New<span class="subtext">Employee</span></a></li>
+            <li><a href="calculate">Calculate<span class="subtext">Payroll</span></a></li>
+            <li><a href="history">Employee's<span class="subtext">History</span></a></li>
+        </ul>
+        <a href="login" class="nav-logout">Logout</a>
+    </nav>
+</header>
+  <div class="calculate-form">
+    <h1 style = "font-family: Arial,sans-serif;">Calculate Payroll</h1>
+    <form method = 'post' action="">
+      <label for = username></label>
+      <input type="text" name = 'Id' pattern="[0-9]+" title="Please enter digits only" placeholder="ID" value ='{{request.form.id}}' maxlength="5" required>
+      <input type="date" name = 'date' placeholder="Date" value ='{{request.form.date}}' required>
+      <button type="submit">Submit</button>
     </form>
-
+  </div>
 </body>
 </html>

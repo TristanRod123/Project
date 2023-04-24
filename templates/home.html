@@ -3,6 +3,78 @@
 <head>
     <title>Home Page</title>
     <style>
+        #main-header {
+            background-color: #333;
+            color: #fff;
+            display: flex;
+            align-items:center;
+            padding:10px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 9999;
+            font-family: Arial, sans-seriff;
+        }
+
+        h1 {
+            margin:0;
+            font-size:24px;
+            font-family: Arial, sans-serif;
+        }
+
+        li a .subtext {
+            display: block;
+            margin-top: 5px;
+            font-size: 17px;
+
+        }
+
+        .nav-logout {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 10px;
+        }
+
+        .nav-logout:hover {
+            color:aquamarine
+        }
+
+        nav {
+            margin-left: 20px;
+            display:flex;
+            justify-content: flex-end;
+            font-family: Arial, sans-seriff;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding:0;
+            display: flex;
+            flex-grow: 1;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav li {
+            margin:0 10px;
+            flex: 1;
+            text-align: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        nav ul li:hover a{
+            color: aquamarine;
+
+        }
+        
         body{
             background-color: rgb(104, 101, 101);
             display: flex;
@@ -38,7 +110,7 @@
             cursor: pointer;   
         }
         .center-left:hover{
-            background-color: aqua;
+            background-color: aquamarine;
         }
 
         .center-right{
@@ -55,7 +127,7 @@
             cursor: pointer;   
         }
         .center-right:hover{
-            background-color: aqua;
+            background-color: aquamarine;
         }
 
         .center{
@@ -70,16 +142,28 @@
             cursor: pointer;   
         }
         .center:hover{
-            background-color: aqua;
+            background-color: aquamarine;
         }
     </style>
 </head>
 <body>
+    <header id="main-header">
+        <h1>Payroll</h1>
+        <nav>
+            <ul>
+                <li><a href="home">Home</a></li>
+                <li><a href="input">New<span class="subtext">Employee</span></a></li>
+                <li><a href="calculate">Calculate<span class="subtext">Payroll</span></a></li>
+                <li><a href="history">Employee's<span class="subtext">History</span></a></li>
+            </ul>
+            <a href="login" class="nav-logout">Logout</a>
+        </nav>
+    </header>
     <div class = 'button'>
         <form action = '' method = 'post'>
-            <button type = 'submit' name = 'button' value = 'clicked1' class = "center-left">Calculate Payroll</button>
-            <button type = 'submit' name = 'button' value = 'clicked2' class = "center-right">History</button>
-            <button type = 'submit' name = 'button' value = 'clicked3' class = "center">Sign Out</button>
+            <button type = 'submit' name = 'button' value = 'clicked3' class = "center-left">New Employee</button>
+            <button type = 'submit' name = 'button' value = 'clicked1' class = "center-right">Calculate Payroll</button>
+            <button type = 'submit' name = 'button' value = 'clicked2' class = "center">History</button>
         </form>
    </div>
 </body>

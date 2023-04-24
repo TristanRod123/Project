@@ -9,14 +9,15 @@ class Employee:
         self.endDate = endDate
         self.payout = payout
 
-    def add_employee(id, first_name, last_name, hours, wage, start_date, end_date, payout):
-    # code to add employee to file goes here
-        pass
-
-    def to_string(self):
-        return f"{self.id}:{self.firstName}:{self.lastName}:{self.hours}:{self.wage}:{self.endDate}:{self.payout}"
-
-    def writeToFile(filename, employeeobj):
-        information = employeeobj.to_string()
-        with open(filename, 'a') as f:
+    def writeToFile(self, filename):
+        information = f"{self.id}:{self.firstName}:{self.lastName}:{self.hours}:{self.wage}:{self.endDate}:{self.payout}"
+        with open(filename, 'w') as f:
             f.write(information + '\n')
+    
+    def employee_exists(self, filename):
+        with open(filename, 'r') as f:
+            for line in f:
+                fields = line.strip().split(':')
+                if fields[0] == self.id and fields[5] == self.endDate:
+                    return True
+        return False
