@@ -1,11 +1,12 @@
 from distutils.file_util import write_file
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 from stuff.display import *
 from stuff.employee import *
 from stuff.payroll import *
-
+from stuff.employer import *
 
 app = Flask(__name__)
+app.secret_key = "purple"
 
 @app.route('/')
 def loginPage():
@@ -15,11 +16,24 @@ def loginPage():
 def login():
     error = None
     if request.method == 'POST':
-        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
+        username = request.form['username']
+        password = request.form['password']
+        if username != employer1.get_username():
             error = 'Invalid Credentials. Please try again.'
+            flash('User does not exist!')
+            return redirect(url_for('login'))
+        elif password != employer1.get_password():
+            flash('Password was incorrect!')
+            return redirect(url_for('login'))
         else:
+            session['employer'] = username
             return redirect(url_for('home'))
     return render_template('base.html', error=error)
+
+@app.route('/logout-user', methods = ['POST', 'GET'])
+def logout_user():
+    session.pop(employer1.get_username(), None)
+    return redirect(url_for('login'))
         
 
 @app.route('/home', methods=['GET','POST'])
@@ -33,16 +47,19 @@ def home():
             return redirect(url_for('input'))
     return render_template('home.html')
    
-@app.route('/history')
+@app.route('/history', methods=['GET','POST'])
 def history():
+    table_data = []
     if request.method == 'POST':
-        if request.form['button'] == 'clicked1': 
-            id = request.form['Id']
-            displayHistory('employeeInfo.txt',id)
-        if request.form['date'] == 'clicked2':
+        if request.form['button'] == 'clicked2': 
+            table_data = tableData('employeeInfo.txt', "0")
+
+        if request.form['button'] == 'clicked1':
             date = request.form['date']
-            displayAllHistory('employeeInfo.txt',date)
-    return render_template('history.html')
+            table_data = tableData('employeeInfo.txt', date)
+
+
+    return render_template('history.html', table_data=table_data)
 
 @app.route('/calculate', methods = ['GET','POST'])
 def calculate():
@@ -74,10 +91,10 @@ def input():
             message = "Employee already exists"
         else:
             new_employee.writeToFile(employeeFile)
-        #return some response to the client
             message = "Employee added successfully"
         
     return render_template('input.html', message=message)
 
 if(__name__ == "__main__"):
     app.run(debug = True)
+
