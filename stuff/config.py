@@ -1,3 +1,3 @@
 
-username = "dummie"
-password = "password"
+username = "admin"
+password = "admin"

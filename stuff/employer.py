@@ -1,4 +1,4 @@
-from config import username, password
+from stuff.config import *
 class Employer:
     def __init__(self, username, password):
         self.username = username

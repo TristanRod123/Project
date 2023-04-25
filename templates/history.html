@@ -116,9 +116,47 @@
     .history-form button:hover {
       background-color: #0069d9;
     }
+
+    #table-iframe {
+            width: 100%; 
+            height: 400px;
+            margin-top: 20px;
+
+        }
+      table{
+        background-color: white;
+        margin-left: auto;
+        margin-right: auto;
+        overflow-y: auto;
+      }
   </style>
 </head>
 <body>
+   <h1>Table from Text File</h1>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Hours</th>
+            <th>Wage</th>
+            <th>Date</th>
+            <th>Base Pay</th>
+            <th>Payout</th>
+        </tr>
+        {% for row in table_data %}
+        <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+            <td>{{ row[4] }}</td>
+            <td>{{ row[5] }}</td>
+            <td>{{ row[6] }}</td>
+            <td>{{ row[7] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
     <header id="main-header">
         <h1>Payroll</h1>
         <nav>
@@ -128,22 +166,19 @@
                 <li><a href="calculate">Calculate<span class="subtext">Payroll</span></a></li>
                 <li><a href="history">Employee's<span class="subtext">History</span></a></li>
             </ul>
-            <a href="login" class="nav-logout">Logout</a>
+            <a href = "{{ url_for('logout_user') }}" class='nav-logout'>Logout</a>
         </nav>
     </header>
 
   <div class="history-form">
-    <h1 style = "font-family: Arial,sans-serif;">History For One Employee</h1>
+    <h1 style = "font-family: Arial,sans-serif;">History For Certain Date</h1>
     <form method = 'post' action="">
       <label for = username></label>
-      <input type="text" name = 'Id' pattern="[0-9]+" title="Please enter digits only" placeholder="ID" value ='{{request.form.id}}' maxlength="5">
+      <input type="date" name = 'date' placeholder="Date" value ='{{request.form.date}}'>
       <button type = 'submit' name = 'button' value = 'clicked1'>Submit</button>
       <h1 style = "font-family: Arial,sans-serif;">History For All Employee </h1>
-      <input type="date" name = 'date' placeholder="Date" value ='{{request.form.date}}'>
       <button type = 'submit' name = 'button' value = 'clicked2'>Submit</button>
     </form>
-    <iframe src="outputHistory.html" style="border:none; width:100%; height:300px;"></iframe>
-    <iframe src="outputAllHistory.html" style="border:none; width:100%; height:300px;"></iframe>
   </div>
 </body>
 </html>
