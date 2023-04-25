@@ -135,11 +135,15 @@
       <input type="text" name = 'Id' pattern="[0-9]+" title="Please enter digits only" placeholder="ID" value ='{{request.form.id}}' maxlength="5" required>
       <input type="text" name = 'fName' placeholder="First Name" value ='{{request.form.fName}}' required>
       <input type="text" name = 'lName' placeholder="Last Name" value ='{{request.form.lName}}' required>
-      <input type="text" name = 'Hours' pattern="[0-9]+" title="Please enter digits only" placeholder="Hours" value ='{{request.form.hours}}' required>
+      <input type="text" name = 'Hours' pattern="[0-9]+" title="Please enter digits only" placeholder="Hours" value ='{{request.form.hours}}' maxlength="3" required>
       <input type="text" name = 'Wage' pattern="[0-9]+" title="Please enter digits only" placeholder="Wage" value ='{{request.form.wage}}' required>
       <input type="date" name = 'date' placeholder="Date" value ='{{request.form.date}}' required>
       <button type="submit">Submit</button>
     </form>
-  </div>
+    <div id = "message">
+        {% if message %}
+            {{ message }}
+        {% endif %}
+    </div>
 </body>
 </html>

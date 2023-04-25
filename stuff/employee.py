@@ -1,17 +1,21 @@
+from stuff.payroll import after_basePay
 
 class Employee:
-    def __init__(self, id, firstName, lastName, hours, wage, endDate, payout):
+    def __init__(self, id, firstName, lastName, hours, wage, endDate, basepay ,payout):
         self.id = id
         self.firstName = firstName
         self.lastName = lastName
         self.hours = hours
         self.wage = wage
         self.endDate = endDate
+        self.basepay = basepay
         self.payout = payout
 
     def writeToFile(self, filename):
-        information = f"{self.id}:{self.firstName}:{self.lastName}:{self.hours}:{self.wage}:{self.endDate}:{self.payout}"
-        with open(filename, 'w') as f:
+        total = float(self.wage) * float(self.hours)
+        self.payout = after_basePay(float(self.wage), (self.hours))
+        information = f"{self.id}:{self.firstName}:{self.lastName}:{self.hours}:{self.wage}:{self.endDate}:{self.basepay}:{self.payout}"
+        with open(filename, 'a') as f:
             f.write(information + '\n')
     
     def employee_exists(self, filename):

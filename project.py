@@ -44,17 +44,20 @@ def history():
             displayAllHistory('employeeInfo.txt',date)
     return render_template('history.html')
 
-@app.route('/calculate')
+@app.route('/calculate', methods = ['GET','POST'])
 def calculate():
+    message = ''
     if request.method == 'POST':
-        id = request.form['Id']
-        date = request.form['date'] 
-        pay = updatePayout('employeeInfo.txt',id,date)
+        wage = request.form['Wage']
+        hours = request.form['Hours'] 
+        pay = after_basePay(wage,hours)
+        message = f"Payout: {str(pay)}"
 
-    return render_template('calculate.html')
+    return render_template('calculate.html', message=message)
 
 @app.route('/input', methods =['GET','POST'])
 def input():
+    message = ''
     if request.method == 'POST':
         id = request.form['Id']
         first_name = request.form['fName']
@@ -62,18 +65,19 @@ def input():
         hours = request.form['Hours']
         wage = request.form['Wage']
         end_date = request.form['date']
-        payout = 'N/A'
+        basepay = float(hours) * float(wage)
+        payout = 0
 
-        new_employee = Employee(id, first_name, last_name, hours, wage, end_date, payout)
+        new_employee = Employee(id, first_name, last_name, hours, wage, end_date, basepay, payout)
         employeeFile = "employeeInfo.txt"
         if (new_employee.employee_exists(employeeFile)):
-            return "Employee already exists"
+            message = "Employee already exists"
         else:
             new_employee.writeToFile(employeeFile)
         #return some response to the client
-            return "Employee added successfully"
+            message = "Employee added successfully"
         
-    return render_template('input.html',)
+    return render_template('input.html', message=message)
 
 if(__name__ == "__main__"):
     app.run(debug = True)
